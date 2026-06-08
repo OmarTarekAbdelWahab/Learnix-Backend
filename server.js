@@ -21,12 +21,12 @@ app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/modules", moduleRoutes);
 
-// connect DB
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("MongoDB connected");
-    app.listen(process.env.PORT, "0.0.0.0", () =>
-      console.log(`Server running on port ${process.env.PORT}`)
-    );
-  })
-  .catch(err => console.log(err));
+
+
+if (!global.mongoose) {
+  global.mongoose = mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log("MongoDB connected"))
+    .catch(err => console.log(err));
+}
+
+module.exports = app;
