@@ -81,13 +81,12 @@ router.post("/progress", auth, async (req, res) => {
 });
 
 
-/// MARK AWAITING TEST
 router.post("/complete", auth, async (req, res) => {
   const { moduleId } = req.body;
 
   const progress = await ModuleProgress.findOneAndUpdate(
     { userId: req.user.id, moduleId },
-    { status: "awaiting-test" },
+    { status: "finished" },
     { new: true }
   );
 
@@ -95,20 +94,7 @@ router.post("/complete", auth, async (req, res) => {
 });
 
 
-/// SUBMIT MODULE TEST
-router.post("/test", auth, async (req, res) => {
-  const { moduleId, score } = req.body;
-
-  const progress = await ModuleProgress.findOneAndUpdate(
-    { userId: req.user.id, moduleId },
-    {
-      status: "finished",
-      testResult: score
-    },
-    { new: true }
-  );
-
-  res.json(progress);
-});
 
 module.exports = router;
+
+
