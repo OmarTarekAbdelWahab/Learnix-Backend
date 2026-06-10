@@ -7,6 +7,7 @@ const morgan = require("morgan")
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const moduleRoutes = require("./routes/modules");
+const examRoutes = require("./routes/exam");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/auth", authRoutes);
 
 app.use("/user", userRoutes);
 app.use("/modules", moduleRoutes);
+app.use("/exam", examRoutes);
 
 
 
